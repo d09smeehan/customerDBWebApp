@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Output View</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class = "container mainContainer">
+	<div class = "row titleRow">
+			<h2 class="title">Customer List</h2>
+	</div>
+	<div class = "row">
+		<table class = "table" id = customerTable>
+			<tr>
+				<th>Full Name</th>
+				<th>Address Line 1</th>
+				<th>Address Line 2</th>
+				<th>Address Line 3</th>
+				<th>City</th>
+				<th>Country</th>
+				<th>Phone Number</th>
+	       </tr>
+		</table>
+	</div>
+	
+	<div class = "row">
+		<input type="button" class="btn btn-info" value="Back to Form" onclick="back()">
+	</div>
+</div>
+
+
+
+</body> 
+
+
+
+<script>
+
+     $(document).ready(function () {
+     	         customerList();
+     });
+     
+     
+   	function customerList(){
+		$.ajax({
+			url : '/all',
+			type : 'GET',
+			dataType : 'json',
+			success : function(customerData){
+				createCustomerTable(customerData);
+			},
+			error : function(request, message, error) {
+	            handleException(request, message, error);
+	        }
+	    });
+	}
+
+	function createCustomerTable(customerData){
+		$.each(customerData, function(i, customer){
+			tableAddRow(customer);
+		})
+	}
+
+	function tableAddRow(customer){
+		if($("#customerTable tbody").length == 0){
+			$("'customerTable").append("<tbody></tbody>");
+		}
+		$("#customerTable tbody").append(buildTableRow(customer));
+	}
+	
+	function buildTableRow(customer){
+		var row = "<tr>" + "<td>" + customer.fullName + "</td>" + "<td>" +customer.addressLine1
+	            + "</td>" + "<td>" + customer.addressLine2 + "</td>" + "<td>" + customer.addressLine3
+	            + "</td>" + "<td>" + customer.city + "</td>" + "<td>" + customer.country+"</td>" 
+	            + "<td>" + customer.phoneNumber + "</td>" + "</tr>";
+	            
+	    return row;
+	}
+	
+	function handleException(request, message, error) {
+	
+	    var msg = "";
+	    msg += "Code: " + request.status + "\n";
+	    msg += "Text: " + request.statusText + "\n";
+	    if (request.responseJSON != null) {
+	        msg += "Message" + request.responseJSON.Message + "\n";
+	    }
+	    alert(msg);
+	 }
+	 
+	function back()
+	{
+	     location.href = "/";
+	} 
+</script>
+
+</html>
+

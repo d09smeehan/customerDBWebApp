@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Customer Form</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class = "container mainContainer">
+	<div class = "row titleRow">
+		<h2 class = "title">Customer Forms</h2>
+	</div>
+	<div class = "row">
+		<form action = "#" th:action="@{/saveCustomer}" th:object="${Customer}" method = "POST">
+			<div class = "form-group">			
+			<input type="text" class="form-control" id="customerName" name="customerName" placeholder="Full Name" th:field="*{fullName}"/><br>
+			<input type="text" class="form-control" id="adLine1" name="adLine1" placeholder="Address Line One" th:field="*{addressLine1}"/><br>
+			<input type="text" class="form-control" id="adLine2" name="adLine2" placeholder="Address Line Two" th:field="*{addressLine2}"/><br>
+			<input type="text" class="form-control" id="adLine3" name="adLine3" placeholder="Address Line Three" th:field="*{addressLine3}"/><br>
+			<input type="text" class="form-control" id="city" name="city" placeholder="Town/City" th:field="*{city}"/><br>
+			<input type="text" class="form-control" id="country" name="country" placeholder="Country" th:field="*{country}"/><br>
+			<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number" th:field="*{phoneNumber}"/><br>
+			</div>
+
+			<p>Please enter your details and click the submit button below.</p>
+			<button style = "float:left;"name="submit" class = "btn btn-info" type = "submit">Submit</button>
+			<input style="float:right;"type="button" class="btn btn-info" value="View Customers" onclick="viewCustomers()">
+			
+		</form>
+		
+	</div>
+</div>
+
+</body>
+
+
+</html>
+
+<script>
+	function viewCustomers()
+	{
+	     location.href = "/getCustomers";
+	} 
+</script>

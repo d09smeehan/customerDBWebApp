@@ -1,0 +1,21 @@
+.mainContainer{
+ 	text-align:center;
+}
+.titleRow{
+	height:100px;
+	position:relative;
+}
+.title{
+	 margin: 0;
+	 position: absolute;
+	 top: 50%;
+	 -ms-transform: translateY(-50%);
+	 transform: translateY(-50%);
+	font-family: 'Courier New', monospace;
+}
+
+.form-group{
+	background-color:#CAFAFE;
+	padding:20px;
+	border-radius:10px;
+}
